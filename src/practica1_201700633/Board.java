@@ -19,8 +19,8 @@ import practica1_201700633.Shape.Tetrominoes;
 public class Board extends JPanel implements ActionListener {
 
 
-    final int BoardWidth = 20;
-    final int BoardHeight = 44;
+    public static int BoardWidth = 0;
+    public static int BoardHeight = 0;
 
     Timer timer;
     boolean isFallingFinished = false;
@@ -35,9 +35,11 @@ public class Board extends JPanel implements ActionListener {
 
 
 
-    public Board(Tetris parent) {
+    public Board(TETRICOMPI parent, int x , int y) {
 
        setFocusable(true);
+       BoardWidth = x;
+       BoardHeight = y ;
        curPiece = new Shape();
        timer = new Timer(400, this);
        timer.start(); 
@@ -251,7 +253,7 @@ public class Board extends JPanel implements ActionListener {
              int keycode = e.getKeyCode();
              if (keycode==KeyEvent.VK_ENTER){
                  String[] args={"hi"};
-                 Tetris.main(args);
+               //  Tetris.main(args); para nuevo nivel hacer un metodo en principal
              }   
              if (keycode==KeyEvent.VK_Q){
                  System.exit(0);
