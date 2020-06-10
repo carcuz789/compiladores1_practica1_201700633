@@ -254,6 +254,7 @@ public class Board extends JPanel implements ActionListener {
              if (keycode==KeyEvent.VK_ENTER){
                  String[] args={"hi"};
                //  Tetris.main(args); para nuevo nivel hacer un metodo en principal
+               PRINCIPAL.jugar();
              }   
              if (keycode==KeyEvent.VK_Q){
                  System.exit(0);
