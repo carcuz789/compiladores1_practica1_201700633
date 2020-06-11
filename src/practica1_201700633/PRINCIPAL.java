@@ -8,15 +8,24 @@ package practica1_201700633;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author rodrigo
  */
 public class PRINCIPAL extends javax.swing.JFrame {
-
+   public static  int nivelesnum;
+   public static int nivelactual = 0;
+   public static int numformas = 0;
+   public static int tocaforma = 0;
+   public static ArrayList<NIVEL> NIVELES = new ArrayList<>();
+    public static ArrayList<String> FORMAS = new ArrayList<>();
+    public static ArrayList<String> DIRECCION = new ArrayList<>();
+   
     /**
      * Creates new form PRINCIPAL
      */
@@ -46,7 +55,10 @@ public class PRINCIPAL extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JtAyuda = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,9 +96,19 @@ public class PRINCIPAL extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton5.setText("LEXICO REPORTE");
+        jButton5.setText("LEXICO 1 REPORTE");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("ERRORES REPORTE");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("ARCHIVO 2 -> FORMAS");
 
@@ -94,7 +116,7 @@ public class PRINCIPAL extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JtAyuda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -105,7 +127,23 @@ public class PRINCIPAL extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(JtAyuda);
+
+        jButton7.setText("Manual");
+
+        jButton8.setText("Acerca de");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("LEXICO 2 REPORTE");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,23 +154,35 @@ public class PRINCIPAL extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton2)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton3)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(27, 27, 27)
+                                .addComponent(jButton2)
+                                .addGap(33, 33, 33)
+                                .addComponent(jButton3)
+                                .addGap(32, 32, 32)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
                         .addGap(63, 63, 63)
                         .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                        .addComponent(jButton6)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +194,10 @@ public class PRINCIPAL extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jButton6)
+                    .addComponent(jButton7)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -260,12 +313,9 @@ public class PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-         int x=25,y=30;
-         String Nivel="";
-         TETRICOMPI PANEL = new TETRICOMPI(x,y,Nivel);
-         PANEL.setLocationRelativeTo(null);
-         PANEL.setVisible(true);
+            // TODO add your handling code here:
+            numformas = Lexico.tipo3.size();
+            jugar();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -289,12 +339,117 @@ public class PRINCIPAL extends javax.swing.JFrame {
                 System.out.println("ERROR LEXICO ->"+Lexico.error2.get(i)+"EN LA FILA "+i+" EN LA COLUMNA "+"\n"); 
             }
         }else{
-            for (int i = 0; i < Lexico.tokens.size(); i++) {
-                 System.out.println(Lexico.tokens.get(i));
+            for (int i = 0; i < Lexico.tokens2.size(); i++) {
+                 System.out.println(Lexico.tokens2.get(i));
             }
         }
+        ordenar2();
+        ordenar1();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "RODRIGO EDUARDO CARCUZ ORTEGA - 201700633");
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        pintarlexico();
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        pintarLexicoFormas();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        pintarLexicoERRORES();
+    }//GEN-LAST:event_jButton6ActionPerformed
+public void pintarlexico(){
+     DefaultTableModel tableModel = new DefaultTableModel() {
+           @Override
+         public boolean isCellEditable(int row, int col)
+           {
+             return false;}
+         };       
+        
+        tableModel.setRowCount(0);
+        tableModel.setColumnCount(0);
+        tableModel.addColumn("NUMERO");   
+        tableModel.addColumn("TOKEN");   
+        tableModel.addColumn("IDENITIFICADOR");   
+        
+        this.JtAyuda.setModel(tableModel);        
+         
+         this.JtAyuda.setRowHeight(50);
+       
+        
+       for (int i = 0; i < Lexico.tokens.size(); i++) {
+           tableModel.addRow(new Object[]{i,Lexico.tokens.get(i),Lexico.tipo.get(i)});
+       }
+        
+       
+        this.JtAyuda.setModel(tableModel);
+        this.JtAyuda.setRowHeight(50);
+}
+public void pintarLexicoFormas(){
+    DefaultTableModel tableModel = new DefaultTableModel() {
+           @Override
+         public boolean isCellEditable(int row, int col)
+           {
+             return false;}
+         };       
+        
+        tableModel.setRowCount(0);
+        tableModel.setColumnCount(0);
+        tableModel.addColumn("NUMERO");   
+        tableModel.addColumn("TOKEN");   
+        tableModel.addColumn("IDENITIFICADOR");   
+        
+        this.JtAyuda.setModel(tableModel);        
+         
+         this.JtAyuda.setRowHeight(50);
+       
+        
+       for (int i = 0; i < Lexico.tokens2.size(); i++) {
+           tableModel.addRow(new Object[]{i,Lexico.tokens2.get(i),Lexico.tipo2.get(i)});
+       }
+        
+       
+        this.JtAyuda.setModel(tableModel);
+        this.JtAyuda.setRowHeight(50);
+}
+public void pintarLexicoERRORES(){
+    DefaultTableModel tableModel = new DefaultTableModel() {
+           @Override
+         public boolean isCellEditable(int row, int col)
+           {
+             return false;}
+         };       
+        
+        tableModel.setRowCount(0);
+        tableModel.setColumnCount(0);
+        tableModel.addColumn("NUMERO");   
+        tableModel.addColumn("TOKEN ERROR");   
+        tableModel.addColumn("IDENITIFICADOR");   
+        
+        this.JtAyuda.setModel(tableModel);        
+         
+         this.JtAyuda.setRowHeight(50);
+       
+        
+       for (int i = 0; i < Lexico.error.size(); i++) {
+           tableModel.addRow(new Object[]{i,Lexico.error.get(i),"ERROR"});
+       }
+        for (int i = 0; i < Lexico.error2.size(); i++) {
+           tableModel.addRow(new Object[]{i,Lexico.error2.get(i),"ERROR"});
+       }
+       
+        this.JtAyuda.setModel(tableModel);
+        this.JtAyuda.setRowHeight(50);
+}
     /**
      * @param args the command line arguments
      */
@@ -329,20 +484,113 @@ public class PRINCIPAL extends javax.swing.JFrame {
             }
         });
     }
-
+public static void ordenar1(){
+    int i=0,x=0,y=0;
+    String nombre ="";
+    boolean estado = true;
+    boolean estado2 = true;
+    ArrayList<String> Nive = new ArrayList<>();
+    do {
+        if (estado==true) {
+             while (!Lexico.tipo.get(i).equals("NUMERO")){
+                 i++;
+             }            
+            nivelesnum = Integer.parseInt( Lexico.tokens.get(i));
+            i++;
+            estado=false;
+        }else{
+             while (!Lexico.tipo.get(i).equals("NUMERO")){
+                 i++;
+            }   
+            x = Integer.parseInt( Lexico.tokens.get(i));
+            i++;
+             while (!Lexico.tipo.get(i).equals("NUMERO")){
+                 i++;
+            } 
+            y = Integer.parseInt( Lexico.tokens.get(i));
+            i++;
+             while (!Lexico.tipo.get(i).equals("TEXTOID")){
+                 i++;
+            }
+            nombre = Lexico.tokens.get(i);
+            i++;
+            do {
+                if (Lexico.tipo.get(i).equals("NUMERAL")) {
+                    Nive.add(Lexico.tokens.get(i));
+                    i++; 
+                    if (i>=Lexico.tokens.size()) {
+                        break;
+                    }
+                }else if (Lexico.tipo.get(i).equals("MULTIPLICACION")) {
+                    Nive.add(Lexico.tokens.get(i));
+                  i++; 
+                  if (i>=Lexico.tokens.size()) {
+                        break;
+                    }
+                }else{
+                    estado2 =false;
+                }
+            } while (estado2==true);
+            
+           
+            NIVEL lev = new NIVEL();
+            lev.setX(x);
+            lev.setY(y);
+            lev.setNombre(nombre);          
+            lev.setBloqueos(Nive);
+            Nive = new ArrayList<>();
+            lev.setFormas(FORMAS);
+            lev.setDireccion(DIRECCION);
+            NIVELES.add(lev);
+         
+            estado2 = true;
+        }
+        
+         
+    } while (i<Lexico.tokens.size());
+    
+    
+}
+public static void ordenar2(){
+    int i=0;
+    do {
+        
+        if (Lexico.tipo2.get(i).equals("PR")) {
+             FORMAS.add(Lexico.tokens2.get(i));
+              i++;
+              i++;
+        DIRECCION.add(Lexico.tokens2.get(i));
+        }else{
+            i++;
+        }
+         
+    } while (i<Lexico.tokens2.size());
+    
+}
+public static void jugar(){
+    
+         NIVEL  nivel1 =    NIVELES.get(nivelactual); 
+          nivelactual++;
+         TETRICOMPI PANEL = new TETRICOMPI(nivel1.getX(),nivel1.getY(),nivel1.getNombre());
+         PANEL.setLocationRelativeTo(null);
+         PANEL.setVisible(true);
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JtAyuda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
